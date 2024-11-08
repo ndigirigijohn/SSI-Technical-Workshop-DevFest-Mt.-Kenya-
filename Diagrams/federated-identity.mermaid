@@ -1,0 +1,30 @@
+flowchart TD
+    User((User))
+    
+    subgraph Identity Providers
+        Google[Google]
+        FB[Facebook]
+        Apple[Apple]
+    end
+    
+    subgraph Services
+        App1[Shopping App]
+        App2[Fitness App]
+        App3[News App]
+        App4[Gaming App]
+    end
+    
+    User --> Google
+    User --> FB
+    User --> Apple
+    
+    Google --> App1
+    Google --> App2
+    FB --> App2
+    FB --> App3
+    Apple --> App3
+    Apple --> App4
+    
+    style User fill:#f9f,stroke:#333
+    style Identity Providers fill:#e4f0f8,stroke:#333
+    style Services fill:#e8f8e4,stroke:#333

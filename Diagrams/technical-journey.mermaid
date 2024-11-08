@@ -1,0 +1,34 @@
+graph TD
+    subgraph Beginner
+        B1[DIDs Basics]
+        B2[Basic Cryptography]
+        B3[VC Data Model]
+    end
+    
+    subgraph Intermediate
+        I1[DID Methods]
+        I2[Credential Protocols]
+        I3[Zero Knowledge Basics]
+        I4[Key Management]
+    end
+    
+    subgraph Advanced
+        A1[Protocol Design]
+        A2[Advanced Cryptography]
+        A3[Governance Frameworks]
+        A4[Performance Optimization]
+    end
+    
+    B1 --> I1
+    B2 --> I2
+    B2 --> I3
+    B3 --> I2
+    
+    I1 --> A1
+    I2 --> A1
+    I3 --> A2
+    I4 --> A2
+    
+    style Beginner fill:#e4f0f8,stroke:#333
+    style Intermediate fill:#f8e4e4,stroke:#333
+    style Advanced fill:#e4f8e4,stroke:#333

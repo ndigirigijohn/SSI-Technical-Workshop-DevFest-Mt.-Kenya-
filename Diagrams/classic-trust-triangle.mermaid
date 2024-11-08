@@ -1,0 +1,12 @@
+graph TD
+    I((Issuer))
+    H((Holder))
+    V((Verifier))
+    
+    I -->|Issues Credential| H
+    H -->|Presents Proof| V
+    I -.->|Trusts| V
+    
+    style I fill:#ff9999,stroke:#333,stroke-width:4px
+    style H fill:#99ff99,stroke:#333,stroke-width:4px
+    style V fill:#9999ff,stroke:#333,stroke-width:4px

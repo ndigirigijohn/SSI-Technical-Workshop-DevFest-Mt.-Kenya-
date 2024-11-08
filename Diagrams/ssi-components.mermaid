@@ -1,0 +1,40 @@
+flowchart TB
+    subgraph Issuer System
+        IW[Issuer Wallet]
+        IS[Signing System]
+    end
+    
+    subgraph Holder System
+        HW[Digital Wallet]
+        VC[Verifiable Credentials]
+        VP[Verifiable Presentations]
+    end
+    
+    subgraph Verifier System
+        VS[Verification Service]
+        VP_V[Presentation Verification]
+    end
+    
+    subgraph Infrastructure
+        DID[(DID Registry)]
+        Schema[(Credential Schema)]
+        Status[(Revocation Registry)]
+    end
+    
+    IW -->|Creates| VC
+    IS -->|Signs| VC
+    VC -->|Stored in| HW
+    HW -->|Creates| VP
+    VP -->|Submits to| VS
+    VS -->|Checks| VP_V
+    
+    IW -->|Registers| DID
+    IW -->|Publishes| Schema
+    VS -->|Verifies against| DID
+    VS -->|Validates against| Schema
+    VS -->|Checks| Status
+    
+    style Issuer System fill:#f9f,stroke:#333
+    style Holder System fill:#afd,stroke:#333
+    style Verifier System fill:#fda,stroke:#333
+    style Infrastructure fill:#ddf,stroke:#333

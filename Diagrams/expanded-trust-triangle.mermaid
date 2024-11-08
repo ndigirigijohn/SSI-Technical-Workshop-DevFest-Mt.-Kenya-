@@ -1,0 +1,32 @@
+graph TD
+    subgraph Trust Triangle
+        I((Issuer))
+        H((Holder))
+        V((Verifier))
+    end
+    
+    subgraph Registries
+        DID[DID Registry]
+        Schema[Schema Registry]
+        Rev[Revocation Registry]
+    end
+    
+    I -->|1. Issues Credential| H
+    H -->|4. Presents Proof| V
+    
+    I -->|2a. Registers DID| DID
+    I -->|2b. Publishes Schema| Schema
+    I -->|2c. Updates Status| Rev
+    
+    V -->|5a. Verifies DID| DID
+    V -->|5b. Checks Schema| Schema
+    V -->|5c. Checks Revocation| Rev
+    
+    H -->|3. Creates Presentation| H
+    
+    style I fill:#ff9999,stroke:#333,stroke-width:4px
+    style H fill:#99ff99,stroke:#333,stroke-width:4px
+    style V fill:#9999ff,stroke:#333,stroke-width:4px
+    style DID fill:#ffff99,stroke:#333
+    style Schema fill:#ffff99,stroke:#333
+    style Rev fill:#ffff99,stroke:#333

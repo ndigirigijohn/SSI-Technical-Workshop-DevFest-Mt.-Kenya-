@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant I as Issuer
+    participant H as Holder
+    participant V as Verifier
+    participant R as Registry
+    
+    Note over I,R: 1. DID Operations
+    I->>R: Create DID
+    I->>R: Register DID
+    V->>R: Resolve DID
+    
+    Note over I,H: 2. Credential Issuance
+    I->>I: Create Credential
+    I->>I: Sign Credential
+    I->>H: Issue Credential
+    
+    Note over H,V: 3. Verification
+    H->>H: Create Presentation
+    H->>V: Present Credential
+    V->>R: Verify DID
+    V->>V: Verify Signature
+    V->>H: Return Result

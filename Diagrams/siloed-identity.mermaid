@@ -1,0 +1,26 @@
+flowchart LR
+    User((User))
+    subgraph Bank
+        BankID[Identity Data]
+        BankAuth[Authentication]
+    end
+    subgraph Hospital
+        HospID[Identity Data]
+        HospAuth[Authentication]
+    end
+    subgraph University
+        UniID[Identity Data]
+        UniAuth[Authentication]
+    end
+    
+    User --> BankAuth
+    User --> HospAuth
+    User --> UniAuth
+    BankAuth --> BankID
+    HospAuth --> HospID
+    UniAuth --> UniID
+    
+    style User fill:#f9f,stroke:#333
+    style Bank fill:#e4f0f8,stroke:#333
+    style Hospital fill:#e4f0f8,stroke:#333
+    style University fill:#e4f0f8,stroke:#333

@@ -1,0 +1,15 @@
+graph TD
+    Issuer([Issuer])
+    Holder([Holder])
+    Verifier([Verifier])
+    Ledger[[Blockchain/Registry]]
+    
+    Issuer -->|1. Issues Credential| Holder
+    Holder -->|3. Presents Proof| Verifier
+    Issuer -->|2. Registers DID/Schema| Ledger
+    Verifier -->|4. Verifies| Ledger
+    
+    style Issuer fill:#f9f,stroke:#333
+    style Holder fill:#afd,stroke:#333
+    style Verifier fill:#fda,stroke:#333
+    style Ledger fill:#ddf,stroke:#333

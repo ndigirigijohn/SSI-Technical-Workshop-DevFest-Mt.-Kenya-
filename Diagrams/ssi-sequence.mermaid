@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant I as Issuer
+    participant DID as DID Registry
+    participant S as Schema Registry
+    participant R as Revocation Registry
+    participant H as Holder
+    participant V as Verifier
+    
+    Note over I,R: Setup Phase
+    I->>DID: Register DID
+    I->>S: Publish Credential Schema
+    
+    Note over I,H: Issuance Phase
+    I->>H: Issue Credential
+    I->>R: Update Credential Status
+    
+    Note over H,V: Verification Phase
+    H->>H: Create Presentation
+    H->>V: Present Proof
+    V->>DID: Verify Issuer DID
+    V->>S: Verify Schema
+    V->>R: Check Revocation Status
+    V->>V: Validate Proof
+    V->>H: Return Result
