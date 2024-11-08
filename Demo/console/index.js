@@ -39,8 +39,15 @@ async function generateKeyPair(role) {
     console.log('Key ID:', keyPair.id);
     console.log('Type:', keyPair.type);
     
-    const exported = await keyPair.export({publicKey: true});
-    console.log('Exported:', exported);
+    // Export both public and private keys
+    const exportedPublic = await keyPair.export({publicKey: true, privateKey: false});
+    const exportedPrivate = await keyPair.export({publicKey: false, privateKey: true});
+    
+    console.log('\n📤 Exported Public Key Info:');
+    console.log(JSON.stringify(exportedPublic, null, 2));
+    
+    console.log('\n🔐 Private Key (Keep this secret!):');
+    console.log('Private Key Multibase:', exportedPrivate.privateKeyMultibase);
     
     return keyPair;
   } catch (error) {
@@ -88,7 +95,8 @@ async function issueCredential(issuerKeyPair, holderDid) {
               '3. Demonstrated understanding of SSI concepts through practical implementation'
           },
           image: {
-            id: 'https://placeholder.com/workshop-badge.png', 
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrJ20Y03jPHKxgQ2HXQ36tGm9u62u4pedvpA&s',
+
             type: 'Image'
           }
         },
@@ -176,16 +184,30 @@ async function runDemo() {
   try {
     console.log('🚀 Starting DevFest Mt Kenya SSI Workshop Demo...\n');
 
-    console.log('1️⃣ Generating keys for issuer and participant...');
+    console.log('1️⃣ Generating keys for all parties in the Trust Triangle...');
+    console.log('----------------------------------------');
+    console.log('👤 ISSUER (DevFest Mt Kenya):');
     const issuerKeyPair = await generateKeyPair('issuer');
-    const participantKeyPair = await generateKeyPair('participant');
+    
+    console.log('\n👤 HOLDER (Workshop Participant):');
+    const holderKeyPair = await generateKeyPair('holder');
+    
+    //Not needed to be able verify credentials ,just for demo
+    console.log('\n👤 VERIFIER (Third Party):');
+    const verifierKeyPair = await generateKeyPair('verifier');
 
     console.log('\n2️⃣ Creating and issuing workshop attendance credential...');
-    const credential = await issueCredential(issuerKeyPair, participantKeyPair.controller);
-    console.log('✅ Credential issued');
+    console.log('ISSUER ➡️ HOLDER');
+    const credential = await issueCredential(issuerKeyPair, holderKeyPair.controller);
+    console.log('==================================');
+
+    console.log('✅ Credential issued to holder');
     console.log('\nCredential:', JSON.stringify(credential, null, 2));
 
-    console.log('\n3️⃣ Verifying credential...');
+    console.log('==================================');
+
+
+    console.log('\n3️⃣ Verifying credential (HOLDER ➡️ VERIFIER)...');
     const result = await verifyCredential(credential, issuerKeyPair);
     
     if (result.verified) {
@@ -195,15 +217,32 @@ async function runDemo() {
       console.log('\n🎉 Congratulations! 🎉');
       console.log('==================================');
       console.log('🌟 You have successfully:');
-      console.log('   ✅ Generated DIDs');
+      console.log('   ✅ Generated DIDs for all parties');
       console.log('   ✅ Created a Verifiable Credential');
-      console.log('   ✅ Issued the Credential');
-      console.log('   ✅ Verified the Credential');
+      console.log('   ✅ Issued the Credential (Issuer ➡️ Holder)');
+      console.log('   ✅ Verified the Credential (Holder ➡️ Verifier)');
+      
+      console.log('\n🔷 Trust Triangle Visualization:');
+      console.log('----------------------------------');
+      console.log('          ISSUER (DevFest)');
+      console.log('              🏛️');
+      console.log('             ╱ ╲');
+      console.log('            ╱   ╲');
+      console.log('           ╱     ╲');
+      console.log('          ╱       ╲');
+      console.log('         ╱         ╲');
+      console.log('    👤 HOLDER ──── VERIFIER 🔍');
+      console.log('    (Alice)    Present   (Third Party)');
+      console.log('\n📝 Flow explanation:');
+      console.log('1. Issuer ➡️ Holder: Issues credential');
+      console.log('2. Holder ➡️ Verifier: Presents credential');
+      console.log('3. Verifier ➡️ Issuer: Verifies signature');
+      
       console.log('\n🎓 You\'ve completed the SSI Technical Demo!');
       console.log('💡 You now understand the basics of:');
       console.log('   • DIDs (Decentralized Identifiers)');
       console.log('   • VCs (Verifiable Credentials)');
-      console.log('   • Credential Issuance & Verification');
+      console.log('   • The SSI Trust Triangle');
       console.log('\n🚀 Keep building the decentralized future!');
       console.log('==================================');
     } else {
