@@ -38,12 +38,3 @@ The evolution of Self-Sovereign Identity reflects a growing recognition of indiv
 2. Sovrin Foundation - Sovrin Network Launch
 3. Decentralized Identity Foundation - Various Publications on SSI Standards
 
-Citations:
-[1] https://www.ncbi.nlm.nih.gov/books/NBK220738/
-[2] https://www.aarp.org/retirement/social-security/info-2020/social-security-history-timeline.html
-[3] https://www.rooselaw.com/the-history-of-ssi-ssd/
-[4] https://www.ssa.gov/history/reports/crsleghist2.html
-[5] https://en.wikipedia.org/wiki/Social_Security_Reform_Act_of_1983
-[6] https://iss-ssi.org/history/
-[7] https://www.worldwidejournals.com/international-journal-of-scientific-research-(IJSR)/recent_issues_pdf/2013/May/May_2013_1367586775_a9f79_15.pdf__15.pdf
-[8] https://mospi.gov.in/53-small-scale-industries
